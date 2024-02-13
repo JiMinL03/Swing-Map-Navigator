@@ -1,2 +1,4 @@
-com\mycompany\journeymate\DB\user.class
 com\mycompany\journeymate\JourneyMate.class
+com\mycompany\journeymate\GUI\LoginGUI$1.class
+com\mycompany\journeymate\GUI\RegisterGUI.class
+com\mycompany\journeymate\GUI\LoginGUI.class

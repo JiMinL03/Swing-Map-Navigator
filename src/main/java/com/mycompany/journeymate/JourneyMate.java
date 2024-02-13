@@ -4,6 +4,7 @@
 
 package com.mycompany.journeymate;
 
+import com.mycompany.journeymate.GUI.LoginGUI;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,6 +17,9 @@ import java.sql.SQLException;
 public class JourneyMate {
 
     public static void main(String[] args) {
+        LoginGUI gui = new LoginGUI();
+        gui.setVisible(true);
+        
         String url = "jdbc:mariadb://localhost:3306/JourneyMate";
         String user = "root";
         String password = "JiMinL";
