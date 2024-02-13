@@ -71,11 +71,6 @@ public class LoginGUI extends javax.swing.JFrame {
         loginButt.setBackground(new java.awt.Color(111, 197, 81));
         loginButt.setFont(new java.awt.Font("HY중고딕", 0, 12)); // NOI18N
         loginButt.setText("확인");
-        loginButt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginButtActionPerformed(evt);
-            }
-        });
 
         idInput.setFont(new java.awt.Font("HY중고딕", 1, 18)); // NOI18N
 
@@ -87,6 +82,11 @@ public class LoginGUI extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(111, 197, 81));
         jButton1.setFont(new java.awt.Font("HY그래픽M", 0, 12)); // NOI18N
         jButton1.setText("회원가입");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel2.setText("JourneyMate");
@@ -113,8 +113,7 @@ public class LoginGUI extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(89, 89, 89)
-                                .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(394, 394, 394))))
         );
         layout.setVerticalGroup(
@@ -144,12 +143,11 @@ public class LoginGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void loginButtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtActionPerformed
-        // TODO add your handling code here:
-        RegisterGUI register = new RegisterGUI();
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        RegisterGUI register= new RegisterGUI();
         register.setVisible(true);
         dispose();
-    }//GEN-LAST:event_loginButtActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField idInput;

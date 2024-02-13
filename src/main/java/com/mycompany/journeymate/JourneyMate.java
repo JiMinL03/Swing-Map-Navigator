@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package com.mycompany.journeymate;
 
 import com.mycompany.journeymate.GUI.LoginGUI;
@@ -10,10 +6,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- *
- * @author LG
- */
 public class JourneyMate {
 
     public static void main(String[] args) {
