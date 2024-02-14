@@ -20,7 +20,7 @@ public class LoginGUI extends javax.swing.JFrame {
         border();
     }
 
-    private void fixingFrame() {
+    private void fixingFrame() { //프레임 고정
         setResizable(false);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (screenSize.width - getWidth()) / 2;
@@ -28,12 +28,12 @@ public class LoginGUI extends javax.swing.JFrame {
         setLocation(x, y);
     }
 
-    private void fixingButton() {
+    private void fixingButton() { 
         Font font = new Font("HY중고딕", Font.PLAIN, 20);
         loginButt.setFont(font);
     }
 
-    private void image() {
+    private void image() {//label에 아이콘 넣는 메서드
         String imagePath = "/image/free-icon-placeholder-2536611.png";
         ImageIcon icon = new ImageIcon(getClass().getResource(imagePath));
 
@@ -48,7 +48,7 @@ public class LoginGUI extends javax.swing.JFrame {
         image.setIcon(scaledIcon);  // 아이콘 설정
     }
 
-    private void border() {
+    private void border() {//input 요소들마다 테두리를 넣어줌
         AbstractBorder border = new LineBorder(Color.black, 2);
         idInput.setBorder(border);
         pwInput.setBorder(border);
@@ -144,6 +144,7 @@ public class LoginGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //확인 버튼을 누르면 회원가입 화면으로 넘어감
         RegisterGUI register= new RegisterGUI();
         register.setVisible(true);
         dispose();
