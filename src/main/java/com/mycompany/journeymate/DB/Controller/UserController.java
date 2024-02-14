@@ -18,9 +18,11 @@ public class UserController { //사용자의 요청을 처리하고 응답을 �
         this.mail = dataToSend.get(2);
         this.name = dataToSend.get(3);
         
-        UserRespository respository = new UserRespository();
+        UserRespository respository = new UserRespository(this);
         respository.connect();
         respository.createUserTable();
+        respository.inputRegisterData();
+        respository.closeConnection();
     }
 
     public ArrayList<String> getDataToSend() {
