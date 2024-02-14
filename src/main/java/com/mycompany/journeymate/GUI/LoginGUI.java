@@ -1,12 +1,15 @@
 package com.mycompany.journeymate.GUI;
 
+import com.mycompany.journeymate.DB.Controller.LoginController;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.Font;
 import java.awt.Image;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.LineBorder;
 
@@ -53,7 +56,19 @@ public class LoginGUI extends javax.swing.JFrame {
         idInput.setBorder(border);
         pwInput.setBorder(border);
     }
+    
+    public ArrayList<String> sendData() {
+        //입력받은 input 요소들을 새로운 변수의 값에 대입하고 array 타입으로 리턴한다.
+        String id = idInput.getText();
+        String pw = pwInput.getText();
 
+        ArrayList<String> data = new ArrayList<>();
+        data.add(id);
+        data.add(pw);
+        data.add("null");
+        data.add("null");
+        return data;
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -71,6 +86,11 @@ public class LoginGUI extends javax.swing.JFrame {
         loginButt.setBackground(new java.awt.Color(111, 197, 81));
         loginButt.setFont(new java.awt.Font("HY중고딕", 0, 12)); // NOI18N
         loginButt.setText("확인");
+        loginButt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginButtActionPerformed(evt);
+            }
+        });
 
         idInput.setFont(new java.awt.Font("HY중고딕", 1, 18)); // NOI18N
 
@@ -149,6 +169,17 @@ public class LoginGUI extends javax.swing.JFrame {
         register.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void loginButtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtActionPerformed
+        ArrayList<String> dataToSend = sendData();
+        LoginController user = new LoginController(dataToSend);
+        JOptionPane.showMessageDialog(null,user.toMessage() , "알림", JOptionPane.INFORMATION_MESSAGE);
+        if(user.toMessage().equals("다시 만나서 반가워요!")){
+            
+        }else{
+            
+        }
+    }//GEN-LAST:event_loginButtActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField idInput;
