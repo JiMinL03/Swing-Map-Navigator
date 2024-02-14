@@ -3,6 +3,7 @@ com\mycompany\journeymate\GUI\RegisterGUI$1.class
 com\mycompany\journeymate\DB\Controller\UserController.class
 com\mycompany\journeymate\JourneyMate.class
 com\mycompany\journeymate\DB\Service\UserService.class
+com\mycompany\journeymate\DB\UserDTO\UserDTO.class
 com\mycompany\journeymate\GUI\LoginGUI$1.class
 com\mycompany\journeymate\GUI\RegisterGUI.class
 com\mycompany\journeymate\GUI\LoginGUI.class
