@@ -1,5 +1,6 @@
 package com.mycompany.journeymate.DB.Controller;
 
+import com.mycompany.journeymate.DB.Respository.UserRespository;
 import java.util.ArrayList;
 
 public class UserController { //사용자의 요청을 처리하고 응답을 생성하는 역할. Service에 전달
@@ -16,6 +17,10 @@ public class UserController { //사용자의 요청을 처리하고 응답을 �
         this.pw = dataToSend.get(1);
         this.mail = dataToSend.get(2);
         this.name = dataToSend.get(3);
+        
+        UserRespository respository = new UserRespository();
+        respository.connect();
+        respository.createUserTable();
     }
 
     public ArrayList<String> getDataToSend() {
