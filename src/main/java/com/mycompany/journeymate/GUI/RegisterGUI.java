@@ -1,6 +1,6 @@
 package com.mycompany.journeymate.GUI;
 
-import com.mycompany.journeymate.DB.Controller.UserController;
+import com.mycompany.journeymate.DB.Controller.RegisterController;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -9,6 +9,7 @@ import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.LineBorder;
 
@@ -51,10 +52,6 @@ public class RegisterGUI extends javax.swing.JFrame {
         pwInput.setBorder(border);
         emailInput.setBorder(border);
         nameInput.setBorder(border);
-        
-        Color redColor = new Color(255, 0, 0);
-        LineBorder redBorder = new LineBorder(redColor, 2);
-        alert.setBorder(redBorder);
     }
 
     public ArrayList<String> sendData() {
@@ -91,7 +88,6 @@ public class RegisterGUI extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        alert = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,13 +101,13 @@ public class RegisterGUI extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(102, 204, 0));
         jLabel3.setText("JourneyMate!");
 
-        idInput.setFont(new java.awt.Font("HY중고딕", 0, 18)); // NOI18N
+        idInput.setFont(new java.awt.Font("HY중고딕", 1, 18)); // NOI18N
 
-        pwInput.setFont(new java.awt.Font("HY중고딕", 0, 18)); // NOI18N
+        pwInput.setFont(new java.awt.Font("HY중고딕", 1, 18)); // NOI18N
 
-        emailInput.setFont(new java.awt.Font("HY중고딕", 0, 18)); // NOI18N
+        emailInput.setFont(new java.awt.Font("HY중고딕", 1, 18)); // NOI18N
 
-        nameInput.setFont(new java.awt.Font("HY중고딕", 0, 18)); // NOI18N
+        nameInput.setFont(new java.awt.Font("HY중고딕", 1, 18)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("HY중고딕", 1, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
@@ -138,47 +134,40 @@ public class RegisterGUI extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("HY중고딕", 0, 18)); // NOI18N
         jLabel8.setText("이메일 :");
 
-        alert.setEditable(false);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(67, 67, 67)
+                .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)))
+                .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 688, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(alert, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3)))
-                        .addGap(47, 47, 47)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(nameInput)
-                                .addComponent(emailInput, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(pwInput, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(idInput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(checkButt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(nameInput)
+                        .addComponent(emailInput, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(pwInput, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(idInput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(checkButt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(72, 72, 72))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addGap(147, 147, 147))
+                .addGap(144, 144, 144))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,11 +187,9 @@ public class RegisterGUI extends javax.swing.JFrame {
                                 .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(201, 201, 201))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(119, 119, 119)
+                        .addGap(144, 144, 144)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(alert, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(idInput, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -229,16 +216,18 @@ public class RegisterGUI extends javax.swing.JFrame {
     private void checkButtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkButtActionPerformed
         //확인버튼을 클릭하면 로그인 화면으로 넘어가고 UserRespository에 값을 전달한다.
         ArrayList<String> dataToSend = sendData();
-        UserController user = new UserController(dataToSend);
+        RegisterController user = new RegisterController(dataToSend);
 
-        LoginGUI login = new LoginGUI();
-        login.setVisible(true);
-        dispose();
+        JOptionPane.showMessageDialog(null, user.toMessage(), "알림", JOptionPane.INFORMATION_MESSAGE);
+        if (!user.toMessage().equals("이미 존재하는 아이디입니다.")) {
+            LoginGUI login = new LoginGUI();
+            login.setVisible(true);
+            dispose();
+        }
     }//GEN-LAST:event_checkButtActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField alert;
     private javax.swing.JButton checkButt;
     private javax.swing.JTextField emailInput;
     private javax.swing.JTextField idInput;

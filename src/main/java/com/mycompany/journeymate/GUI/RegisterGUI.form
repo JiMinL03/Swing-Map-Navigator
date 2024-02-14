@@ -25,49 +25,41 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+              <Component id="image" min="-2" pref="85" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel1" alignment="0" min="-2" pref="213" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="688" max="-2" attributes="0"/>
-                      <Component id="alert" min="-2" pref="201" max="-2" attributes="0"/>
+                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel8" alignment="1" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="nameInput" max="32767" attributes="0"/>
+                      <Component id="emailInput" min="-2" pref="286" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="image" min="-2" pref="85" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel1" alignment="0" min="-2" pref="213" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel8" alignment="1" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="nameInput" max="32767" attributes="0"/>
-                              <Component id="emailInput" min="-2" pref="286" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="pwInput" alignment="1" max="32767" attributes="0"/>
-                              <Component id="idInput" alignment="1" min="-2" pref="286" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="checkButt" alignment="1" min="-2" pref="96" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="pwInput" alignment="1" max="32767" attributes="0"/>
+                      <Component id="idInput" alignment="1" min="-2" pref="286" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="checkButt" alignment="1" min="-2" pref="96" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="147" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -94,11 +86,9 @@
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" pref="54" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="alert" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="idInput" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
                           <Component id="jLabel7" alignment="3" max="32767" attributes="0"/>
@@ -160,28 +150,28 @@
     <Component class="javax.swing.JTextField" name="idInput">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="HY&#xc911;&#xace0;&#xb515;" size="18" style="0"/>
+          <Font name="HY&#xc911;&#xace0;&#xb515;" size="18" style="1"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="pwInput">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="HY&#xc911;&#xace0;&#xb515;" size="18" style="0"/>
+          <Font name="HY&#xc911;&#xace0;&#xb515;" size="18" style="1"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="emailInput">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="HY&#xc911;&#xace0;&#xb515;" size="18" style="0"/>
+          <Font name="HY&#xc911;&#xace0;&#xb515;" size="18" style="1"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="nameInput">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="HY&#xc911;&#xace0;&#xb515;" size="18" style="0"/>
+          <Font name="HY&#xc911;&#xace0;&#xb515;" size="18" style="1"/>
         </Property>
       </Properties>
     </Component>
@@ -240,11 +230,6 @@
           <Font name="HY&#xc911;&#xace0;&#xb515;" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="&#xc774;&#xba54;&#xc77c; :"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="alert">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
       </Properties>
     </Component>
   </SubComponents>

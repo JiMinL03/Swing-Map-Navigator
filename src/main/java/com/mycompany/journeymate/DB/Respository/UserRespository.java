@@ -1,6 +1,6 @@
 package com.mycompany.journeymate.DB.Respository;
 
-import com.mycompany.journeymate.DB.UserDTO.UserDTO;
+import com.mycompany.journeymate.DB.DTO.UserDTO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,12 +9,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class UserRespository { //데이터 액세스 로직을 캡슐화, 직접적인 데이터 접근
+
     private UserDTO userDTO;
     private String id;
     private String pw;
     private String mail;
     private String name;
-    
+
     public UserRespository(UserDTO userDTO) {
         this.userDTO = userDTO;
 
@@ -23,7 +24,7 @@ public class UserRespository { //데이터 액세스 로직을 캡슐화, 직접
         this.mail = userDTO.getMail();
         this.name = userDTO.getName();
     }
-     
+
     String url = "jdbc:mariadb://localhost:3306/JourneyMate";
     String user = "root";
     String password = "JiMinL";
@@ -48,7 +49,7 @@ public class UserRespository { //데이터 액세스 로직을 캡슐화, 직접
         }
     }
 
-    private boolean checkOverlapId() {//중복된 아이디 확인
+    public boolean checkOverlapId() {//중복된 아이디 확인
         String checkOverlapId = "SELECT id FROM user WHERE id = '" + id + "'";
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(checkOverlapId);
@@ -84,6 +85,31 @@ public class UserRespository { //데이터 액세스 로직을 캡슐화, 직접
         } else {
             return "이미 존재하는 아이디입니다.";
         }
+    }
+
+    public boolean checkLogin() {//중복된 아이디 확인
+        String checkLogin = "SELECT id, password FROM user WHERE id = ? AND password = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(checkLogin)) {
+            preparedStatement.setString(1, id);
+            preparedStatement.setString(2, pw);
+
+            // executeQuery를 사용하여 결과 집합을 가져옵니다.
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    // 로그인 성공
+                    System.out.println("Login successful");
+                    return true;
+                } else {
+                    // 로그인 실패
+                    System.out.println("Login unsuccessful");
+                    return false;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Login Error");
+        }
+        return true;
     }
 
     public void closeConnection() { //DB 연결 종료

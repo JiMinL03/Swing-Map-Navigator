@@ -1,7 +1,8 @@
 C:\Users\LG\Documents\NetBeansProjects\Swing-Map-Navigator\src\main\java\com\mycompany\journeymate\DB\Service\UserService.java
 C:\Users\LG\Documents\NetBeansProjects\Swing-Map-Navigator\src\main\java\com\mycompany\journeymate\GUI\LoginGUI.java
 C:\Users\LG\Documents\NetBeansProjects\Swing-Map-Navigator\src\main\java\com\mycompany\journeymate\GUI\RegisterGUI.java
-C:\Users\LG\Documents\NetBeansProjects\Swing-Map-Navigator\src\main\java\com\mycompany\journeymate\DB\Controller\UserController.java
-C:\Users\LG\Documents\NetBeansProjects\Swing-Map-Navigator\src\main\java\com\mycompany\journeymate\DB\UserDTO\UserDTO.java
+C:\Users\LG\Documents\NetBeansProjects\Swing-Map-Navigator\src\main\java\com\mycompany\journeymate\DB\Controller\LoginController.java
 C:\Users\LG\Documents\NetBeansProjects\Swing-Map-Navigator\src\main\java\com\mycompany\journeymate\DB\Respository\UserRespository.java
 C:\Users\LG\Documents\NetBeansProjects\Swing-Map-Navigator\src\main\java\com\mycompany\journeymate\JourneyMate.java
+C:\Users\LG\Documents\NetBeansProjects\Swing-Map-Navigator\src\main\java\com\mycompany\journeymate\DB\Controller\RegisterController.java
+C:\Users\LG\Documents\NetBeansProjects\Swing-Map-Navigator\src\main\java\com\mycompany\journeymate\DB\DTO\UserDTO.java

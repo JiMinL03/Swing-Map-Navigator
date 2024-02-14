@@ -1,10 +1,10 @@
 package com.mycompany.journeymate.DB.Service;
 
-import com.mycompany.journeymate.DB.Controller.UserController;
+import com.mycompany.journeymate.DB.Controller.RegisterController;
 import com.mycompany.journeymate.DB.Respository.UserRespository;
 import java.util.ArrayList;
 
-public class UserService extends UserController { //비즈니스 로직을 처리하는 역할
+public class UserService extends RegisterController { //비즈니스 로직을 처리하는 역할
     private String id;
     private String pw;
     private String mail;
