@@ -1,15 +1,16 @@
 package com.mycompany.journeymate.GUI;
 
+import com.mycompany.journeymate.DB.Controller.UserController;
+import com.mycompany.journeymate.DB.Respository.UserRespository;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.border.AbstractBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 public class RegisterGUI extends javax.swing.JFrame {
@@ -21,7 +22,7 @@ public class RegisterGUI extends javax.swing.JFrame {
         border();
     }
 
-    private void fixingFrame() {
+    private void fixingFrame() { //frame 고정하는 역할
         setResizable(false);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (screenSize.width - getWidth()) / 2;
@@ -29,7 +30,7 @@ public class RegisterGUI extends javax.swing.JFrame {
         setLocation(x, y);
     }
 
-    private void image() {
+    private void image() { //label에 아이콘 넣는 메서드
         String imagePath = "/image/free-icon-placeholder-2536611.png";
         ImageIcon icon = new ImageIcon(getClass().getResource(imagePath));
 
@@ -44,13 +45,29 @@ public class RegisterGUI extends javax.swing.JFrame {
         image.setIcon(scaledIcon);  // 아이콘 설정
     }
 
-    private void border() {
+    private void border() { //input 요소들마다 테두리를 넣어줌
         Color customColor = new Color(111, 197, 81);
         AbstractBorder border = new LineBorder(customColor, 2);
         idInput.setBorder(border);
         pwInput.setBorder(border);
         emailInput.setBorder(border);
         nameInput.setBorder(border);
+    }
+
+    public ArrayList<String> sendData() {
+        //입력받은 input 요소들을 새로운 변수의 값에 대입하고 array 타입으로 리턴한다.
+        String id = idInput.getText();
+        String pw = pwInput.getText();
+        String mail = emailInput.getText();
+        String name = nameInput.getText();
+
+        ArrayList<String> data = new ArrayList<>();
+        data.add(id);
+        data.add(pw);
+        data.add(mail);
+        data.add(name);
+        
+        return data;
     }
 
     @SuppressWarnings("unchecked")
@@ -66,7 +83,7 @@ public class RegisterGUI extends javax.swing.JFrame {
         emailInput = new javax.swing.JTextField();
         nameInput = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        checkButt = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -96,12 +113,12 @@ public class RegisterGUI extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("회원가입");
 
-        jButton1.setBackground(new java.awt.Color(111, 197, 81));
-        jButton1.setFont(new java.awt.Font("HY중고딕", 0, 14)); // NOI18N
-        jButton1.setText("확인");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        checkButt.setBackground(new java.awt.Color(111, 197, 81));
+        checkButt.setFont(new java.awt.Font("HY중고딕", 0, 14)); // NOI18N
+        checkButt.setText("확인");
+        checkButt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                checkButtActionPerformed(evt);
             }
         });
 
@@ -149,7 +166,7 @@ public class RegisterGUI extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(pwInput, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(idInput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(checkButt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 664, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel4)
@@ -193,26 +210,29 @@ public class RegisterGUI extends javax.swing.JFrame {
                     .addComponent(nameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(33, 33, 33)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(checkButt, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(108, 108, 108))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    private void checkButtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkButtActionPerformed
+        //확인버튼을 클릭하면 로그인 화면으로 넘어가고 UserRespository에 값을 전달한다.
+        ArrayList<String> dataToSend = sendData();
+        UserController user = new UserController(dataToSend);
+        
         LoginGUI login = new LoginGUI();
         login.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_checkButtActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton checkButt;
     private javax.swing.JTextField emailInput;
     private javax.swing.JTextField idInput;
     private javax.swing.JLabel image;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
