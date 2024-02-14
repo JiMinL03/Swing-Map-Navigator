@@ -1,6 +1,6 @@
 package com.mycompany.journeymate.DB.Respository;
 
-import com.mycompany.journeymate.DB.Controller.UserController;
+import com.mycompany.journeymate.DB.UserDTO.UserDTO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,23 +9,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class UserRespository { //데이터 액세스 로직을 캡슐화, 직접적인 데이터 접근
-
-    private UserController userController;
+    private UserDTO userDTO;
     private String id;
     private String pw;
     private String mail;
     private String name;
     
-    public UserRespository(UserController userController) {
-        this.userController = userController;
-        this.userController = userController;
+    public UserRespository(UserDTO userDTO) {
+        this.userDTO = userDTO;
 
-        this.id = userController.getId();
-        this.pw = userController.getPw();
-        this.mail = userController.getMail();
-        this.name = userController.getName();
+        this.id = userDTO.getId();
+        this.pw = userDTO.getPw();
+        this.mail = userDTO.getMail();
+        this.name = userDTO.getName();
     }
-
+     
     String url = "jdbc:mariadb://localhost:3306/JourneyMate";
     String user = "root";
     String password = "JiMinL";
