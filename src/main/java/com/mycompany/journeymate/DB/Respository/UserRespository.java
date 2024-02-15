@@ -27,7 +27,7 @@ public class UserRespository { //데이터 액세스 로직을 캡슐화, 직접
 
     String url = "jdbc:mariadb://localhost:3306/JourneyMate";
     String user = "root";
-    String password = "JiMinL";
+    String password = "358935";
     private Connection connection;
 
     public void connect() { //DB 연결
