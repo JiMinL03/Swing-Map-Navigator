@@ -70,6 +70,14 @@ public class RegisterGUI extends javax.swing.JFrame {
         return data;
     }
 
+    private boolean checkSpace() {
+        if (idInput.getText().equals("") || pwInput.getText().equals("") || emailInput.getText().equals("") || nameInput.getText().equals("")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -215,14 +223,18 @@ public class RegisterGUI extends javax.swing.JFrame {
 
     private void checkButtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkButtActionPerformed
         //확인버튼을 클릭하면 로그인 화면으로 넘어가고 UserRespository에 값을 전달한다.
-        ArrayList<String> dataToSend = sendData();
-        RegisterController user = new RegisterController(dataToSend);
+        if (checkSpace()) {
+            ArrayList<String> dataToSend = sendData();
+            RegisterController user = new RegisterController(dataToSend);
 
-        JOptionPane.showMessageDialog(null, user.toMessage(), "알림", JOptionPane.INFORMATION_MESSAGE);
-        if (!user.toMessage().equals("이미 존재하는 아이디입니다.")) {
-            LoginGUI login = new LoginGUI();
-            login.setVisible(true);
-            dispose();
+            JOptionPane.showMessageDialog(null, user.toMessage(), "알림", JOptionPane.INFORMATION_MESSAGE);
+            if (!user.toMessage().equals("이미 존재하는 아이디입니다.")) {
+                LoginGUI login = new LoginGUI();
+                login.setVisible(true);
+                dispose();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "빈칸을 입력해주세요.", "알림", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_checkButtActionPerformed
 
