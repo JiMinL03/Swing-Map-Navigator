@@ -16,6 +16,7 @@ import javax.swing.border.LineBorder;
 public class RegisterGUI extends javax.swing.JFrame {
 
     public RegisterGUI() {
+        setUndecorated(true);
         initComponents();
         fixingFrame();
         image();
@@ -96,6 +97,7 @@ public class RegisterGUI extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        closeBUTT1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -142,6 +144,18 @@ public class RegisterGUI extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("HY중고딕", 0, 18)); // NOI18N
         jLabel8.setText("이메일 :");
 
+        closeBUTT1.setBackground(new java.awt.Color(242, 242, 242));
+        closeBUTT1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        closeBUTT1.setForeground(new java.awt.Color(51, 204, 0));
+        closeBUTT1.setText("X");
+        closeBUTT1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        closeBUTT1.setOpaque(false);
+        closeBUTT1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeBUTT1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -176,6 +190,9 @@ public class RegisterGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addGap(144, 144, 144))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(closeBUTT1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,7 +212,7 @@ public class RegisterGUI extends javax.swing.JFrame {
                                 .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(201, 201, 201))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(144, 144, 144)
+                        .addGap(150, 150, 150)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -216,6 +233,9 @@ public class RegisterGUI extends javax.swing.JFrame {
                         .addGap(33, 33, 33)
                         .addComponent(checkButt, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(104, 104, 104))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(closeBUTT1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -238,9 +258,15 @@ public class RegisterGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_checkButtActionPerformed
 
+    private void closeBUTT1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeBUTT1ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_closeBUTT1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton checkButt;
+    private javax.swing.JButton closeBUTT1;
     private javax.swing.JTextField emailInput;
     private javax.swing.JTextField idInput;
     private javax.swing.JLabel image;
