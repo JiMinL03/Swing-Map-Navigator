@@ -1,11 +1,11 @@
 package com.mycompany.journeymate;
 
-import com.mycompany.journeymate.GUI.MaplistGUI;
+import com.mycompany.journeymate.GUI.LoginGUI;
 
 public class JourneyMate {
 
     public static void main(String[] args) {
-        MaplistGUI gui = new MaplistGUI();
+        LoginGUI gui = new LoginGUI();
         gui.setVisible(true);
     }
 }

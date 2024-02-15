@@ -6,8 +6,6 @@ package com.mycompany.journeymate.GUI;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.LineBorder;
 
@@ -21,12 +19,12 @@ public class MaplistGUI extends javax.swing.JFrame {
      * Creates new form MaplistGUI
      */
     public MaplistGUI() {
+        setUndecorated(true);
         initComponents();
         fixingFrame();
         addImageAddButt();
         addImageLabel();
         addImageSearchButt();
-        border();
     }
 
     private void fixingFrame() {
@@ -103,6 +101,7 @@ public class MaplistGUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         addBUTT = new javax.swing.JButton();
+        closeBUTT1 = new javax.swing.JButton();
         inputPosition = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         searchBUTT = new javax.swing.JButton();
@@ -130,9 +129,16 @@ public class MaplistGUI extends javax.swing.JFrame {
                 addBUTTMouseClicked(evt);
             }
         });
-        addBUTT.addActionListener(new java.awt.event.ActionListener() {
+
+        closeBUTT1.setBackground(new java.awt.Color(242, 242, 242));
+        closeBUTT1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        closeBUTT1.setForeground(new java.awt.Color(51, 204, 0));
+        closeBUTT1.setText("X");
+        closeBUTT1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        closeBUTT1.setOpaque(false);
+        closeBUTT1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addBUTTActionPerformed(evt);
+                closeBUTT1ActionPerformed(evt);
             }
         });
 
@@ -144,14 +150,22 @@ public class MaplistGUI extends javax.swing.JFrame {
                 .addContainerGap(439, Short.MAX_VALUE)
                 .addComponent(addBUTT, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(closeBUTT1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(closeBUTT1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(addBUTT, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
+
+        inputPosition.setBackground(new Color(0,0,0,0));
+        inputPosition.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 204, 0)));
+        inputPosition.setOpaque(false);
 
         jLabel1.setName("image"); // NOI18N
 
@@ -195,13 +209,13 @@ public class MaplistGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addBUTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBUTTActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addBUTTActionPerformed
-
     private void addBUTTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBUTTMouseClicked
-
     }//GEN-LAST:event_addBUTTMouseClicked
+
+    private void closeBUTT1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeBUTT1ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_closeBUTT1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -240,6 +254,7 @@ public class MaplistGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBUTT;
+    private javax.swing.JButton closeBUTT1;
     private javax.swing.JTextField inputPosition;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JLabel jLabel1;
