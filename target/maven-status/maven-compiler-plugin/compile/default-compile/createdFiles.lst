@@ -1,11 +1,15 @@
+com\mycompany\journeymate\GUI\MaplistGUI$3.class
+com\mycompany\journeymate\GUI\MaplistGUI$2.class
 com\mycompany\journeymate\DB\Controller\RegisterController.class
 com\mycompany\journeymate\DB\DTO\UserDTO.class
 com\mycompany\journeymate\GUI\LoginGUI$2.class
 com\mycompany\journeymate\DB\Controller\LoginController.class
+com\mycompany\journeymate\GUI\MaplistGUI.class
 com\mycompany\journeymate\GUI\RegisterGUI.class
 com\mycompany\journeymate\DB\Respository\UserRespository.class
 com\mycompany\journeymate\GUI\RegisterGUI$1.class
 com\mycompany\journeymate\JourneyMate.class
+com\mycompany\journeymate\GUI\MaplistGUI$1.class
 com\mycompany\journeymate\DB\Service\UserService.class
 com\mycompany\journeymate\GUI\LoginGUI$1.class
 com\mycompany\journeymate\GUI\LoginGUI.class
