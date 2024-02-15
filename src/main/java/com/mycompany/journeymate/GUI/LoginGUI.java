@@ -175,9 +175,9 @@ public class LoginGUI extends javax.swing.JFrame {
         LoginController user = new LoginController(dataToSend);
         JOptionPane.showMessageDialog(null,user.toMessage() , "알림", JOptionPane.INFORMATION_MESSAGE);
         if(user.toMessage().equals("다시 만나서 반가워요!")){
-            
-        }else{
-            
+            MaplistGUI map = new MaplistGUI();
+            map.setVisible(true);
+            dispose();
         }
     }//GEN-LAST:event_loginButtActionPerformed
 
