@@ -180,17 +180,13 @@ public class LoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void loginButtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtActionPerformed
-        if (checkSpace()) {
-            ArrayList<String> dataToSend = sendData();
-            LoginController user = new LoginController(dataToSend);
-            JOptionPane.showMessageDialog(null, user.toMessage(), "알림", JOptionPane.INFORMATION_MESSAGE);
-            if (user.toMessage().equals("다시 만나서 반가워요!")) {
-
-            } else {
-
-            }
-        }else{
-            JOptionPane.showMessageDialog(null, "빈칸을 입력해주세요.", "알림", JOptionPane.INFORMATION_MESSAGE);
+        ArrayList<String> dataToSend = sendData();
+        LoginController user = new LoginController(dataToSend);
+        JOptionPane.showMessageDialog(null,user.toMessage() , "알림", JOptionPane.INFORMATION_MESSAGE);
+        if(user.toMessage().equals("다시 만나서 반가워요!")){
+            MaplistGUI map = new MaplistGUI();
+            map.setVisible(true);
+            dispose();
         }
     }//GEN-LAST:event_loginButtActionPerformed
 
