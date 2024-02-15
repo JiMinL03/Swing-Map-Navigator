@@ -31,7 +31,7 @@ public class LoginGUI extends javax.swing.JFrame {
         setLocation(x, y);
     }
 
-    private void fixingButton() { 
+    private void fixingButton() {
         Font font = new Font("HY중고딕", Font.PLAIN, 20);
         loginButt.setFont(font);
     }
@@ -56,7 +56,7 @@ public class LoginGUI extends javax.swing.JFrame {
         idInput.setBorder(border);
         pwInput.setBorder(border);
     }
-    
+
     public ArrayList<String> sendData() {
         //입력받은 input 요소들을 새로운 변수의 값에 대입하고 array 타입으로 리턴한다.
         String id = idInput.getText();
@@ -69,6 +69,15 @@ public class LoginGUI extends javax.swing.JFrame {
         data.add("null");
         return data;
     }
+
+    private boolean checkSpace() {
+        if (idInput.getText().equals("") || pwInput.getText().equals("")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -165,7 +174,7 @@ public class LoginGUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //확인 버튼을 누르면 회원가입 화면으로 넘어감
-        RegisterGUI register= new RegisterGUI();
+        RegisterGUI register = new RegisterGUI();
         register.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
