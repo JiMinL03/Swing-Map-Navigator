@@ -93,7 +93,6 @@ public class MaplistGUI extends javax.swing.JFrame {
 
         inputPosition.setBackground(new Color(0,0,0,0));
         inputPosition.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 204, 0)));
-        inputPosition.setOpaque(false);
 
         jLabel1.setName("image"); // NOI18N
 
@@ -102,7 +101,6 @@ public class MaplistGUI extends javax.swing.JFrame {
         closeBUTT1.setForeground(new java.awt.Color(0, 153, 51));
         closeBUTT1.setText("X");
         closeBUTT1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        closeBUTT1.setOpaque(false);
         closeBUTT1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 closeBUTT1ActionPerformed(evt);
@@ -211,9 +209,20 @@ public class MaplistGUI extends javax.swing.JFrame {
     private void addNewPanel() {
         JPanel panel = new JPanel();
         panel.setBounds(10, 50 + panelCount * 60, 200, 50);
+        panel.setPreferredSize(new Dimension(600, 100)); // 패널의 선호 크기를 늘림
 
-        JLabel label = new JLabel("Label:");
-        JTextField textField = new JTextField(10);
+        
+         String imagePath = "/image/check_14025690.png";
+        ImageIcon icon = new ImageIcon(getClass().getResource(imagePath));
+        Image scaledImage = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+        JLabel label = new JLabel(scaledIcon);
+        
+        JTextField textField = new JTextField(15);
+       // 텍스트 필드 크기 조정
+        textField.setPreferredSize(new Dimension(500, 50)); // 원하는 크기로 조정 (가로, 세로)
+        textField.setMinimumSize(new Dimension(500, 50)); // 텍스트 필드의 최소 크기를 조정
+        textField.setMaximumSize(new Dimension(500, 50)); // 텍스트 필드의 최대 크기를 조정
 
         panel.add(label);
         panel.add(textField);
