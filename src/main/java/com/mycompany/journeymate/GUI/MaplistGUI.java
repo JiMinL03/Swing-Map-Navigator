@@ -13,6 +13,7 @@ public class MaplistGUI extends javax.swing.JFrame {
         fixingFrame();
         addImageAddButt();
         addImageLabel();
+        initScrollPane();
     }
 
     private void fixingFrame() {
@@ -206,31 +207,55 @@ public class MaplistGUI extends javax.swing.JFrame {
         addNewPanel();
     }//GEN-LAST:event_addBUTTActionPerformed
     private int panelCount = 0;
-    private void addNewPanel() {
-        JPanel panel = new JPanel();
-        panel.setBounds(10, 50 + panelCount * 60, 200, 50);
-        panel.setPreferredSize(new Dimension(600, 100)); // 패널의 선호 크기를 늘림
+    private JScrollPane scrollPane; // JScrollPane 변수 추가
+    
+    private void initScrollPane() {
+        scrollPane = new JScrollPane(listPanel);
+        scrollPane.setBounds(listPanel.getBounds()); // listPanel과 같은 위치와 크기로 설정
+        
+        // listPanel을 JScrollPane의 Viewport에 설정
+        scrollPane.setViewportView(listPanel);
+
+    // 스크롤 바를 투명하게 설정
+        scrollPane.getViewport().setOpaque(false);
+        scrollPane.setOpaque(false);
+        scrollPane.setBorder(null);
 
         
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        //scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED); //가로스크롤바 필요시 표시       
+        background.add(scrollPane);
+}
+    
+    private void addNewPanel() {
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        //panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+        panel.setMaximumSize(new Dimension(600, 60));
+               
          String imagePath = "/image/check_14025690.png";
         ImageIcon icon = new ImageIcon(getClass().getResource(imagePath));
-        Image scaledImage = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+        Image scaledImage = icon.getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         JLabel label = new JLabel(scaledIcon);
         
-        JTextField textField = new JTextField(15);
-       // 텍스트 필드 크기 조정
-        textField.setPreferredSize(new Dimension(500, 50)); // 원하는 크기로 조정 (가로, 세로)
-        textField.setMinimumSize(new Dimension(500, 50)); // 텍스트 필드의 최소 크기를 조정
-        textField.setMaximumSize(new Dimension(500, 50)); // 텍스트 필드의 최대 크기를 조정
+        JTextField textField = new JTextField(45);
+         textField.setPreferredSize(new Dimension(400, 60)); // 원하는 크기로 조정 (가로, 세로)
 
+               
         panel.add(label);
-        panel.add(textField);
+        panel.add(Box.createRigidArea(new Dimension(15, 0))); // 간격을 더해줌
+        panel.add(textField);                
 
+        listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS)); // listPanel의 레이아웃을 BoxLayout으로 설정
         listPanel.add(panel);
+        listPanel.add(Box.createRigidArea(new Dimension(0, 20))); // 텍스트 필드 간의 간격                   
+                
+        
         listPanel.revalidate(); // 프레임을 다시 그리기
-        panelCount++;
-    }
+        scrollPane.revalidate(); // 스크롤바 갱신
+        panelCount++;      
+}
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBUTT;
     private javax.swing.JPanel background;
