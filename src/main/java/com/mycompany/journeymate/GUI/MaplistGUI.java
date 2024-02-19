@@ -75,18 +75,14 @@ public class MaplistGUI extends javax.swing.JFrame {
             }
         });
     }
-    
-    ArrayList<Double> coordinates = geo.geocode(location);
-    double latitude = coordinates.get(0);
-    double longitude = coordinates.get(1);
-    String fileName = latitude + "," + longitude;
 
     public void setMap(String location) {
         try {
             showMap.downloadMap(geo.geocode(location));
             ImageIcon mapIcon = showMap.getMap(showMap.downloadMap(geo.geocode(location)));
             map.setIcon(mapIcon);
-            showMap.fileDelete(fileName);
+            showMap.fileDelete(showMap.downloadMap(geo.geocode(location)));
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "잘못된 주소 정보입니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
         }

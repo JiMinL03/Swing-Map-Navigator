@@ -51,6 +51,7 @@ public class Geocoding {
                 System.out.println("HTTP error: " + responseCode);
             }
         } catch (Exception e) {
+            System.out.println("예외 발생! geocode 오류");
         }
         return coordinates;
     }

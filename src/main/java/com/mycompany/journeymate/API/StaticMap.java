@@ -29,7 +29,7 @@ public class StaticMap {
             is.close();
             os.close();
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("예외 발생! staticmap 오류");
         }
         return location;
     }
