@@ -1,8 +1,18 @@
 package com.mycompany.journeymate.GUI;
 
+import com.mycompany.journeymate.API.Geocoding;
+import com.mycompany.journeymate.API.StaticMap;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 public class MaplistGUI extends javax.swing.JFrame {
+
+    String location = "동의대학교";
+    StaticMap showMap = new StaticMap();
+    Geocoding geo = new Geocoding();
 
     public MaplistGUI() {
         setUndecorated(true);
@@ -11,6 +21,9 @@ public class MaplistGUI extends javax.swing.JFrame {
         addImageAddButt();
         addImageLabel();
         initScrollPane();
+        addEnterKeyListener();
+        setMap(location);
+        showMap.fileDelete(location);
     }
 
     private void fixingFrame() {
@@ -52,6 +65,33 @@ public class MaplistGUI extends javax.swing.JFrame {
 
     }
 
+    private void addEnterKeyListener() {
+        inputPosition.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 여기에 Enter 키 입력에 대한 액션을 추가
+                location = inputPosition.getText();
+                setMap(location);
+            }
+        });
+    }
+    
+    ArrayList<Double> coordinates = geo.geocode(location);
+    double latitude = coordinates.get(0);
+    double longitude = coordinates.get(1);
+    String fileName = latitude + "," + longitude;
+
+    public void setMap(String location) {
+        try {
+            showMap.downloadMap(geo.geocode(location));
+            ImageIcon mapIcon = showMap.getMap(showMap.downloadMap(geo.geocode(location)));
+            map.setIcon(mapIcon);
+            showMap.fileDelete(fileName);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "잘못된 주소 정보입니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -61,9 +101,9 @@ public class MaplistGUI extends javax.swing.JFrame {
         addBUTT = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         closeBUTT1 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
         listPanel = new javax.swing.JPanel();
         inputPosition = new javax.swing.JTextField();
+        map = new javax.swing.JLabel();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -72,11 +112,6 @@ public class MaplistGUI extends javax.swing.JFrame {
 
         background.setBackground(new java.awt.Color(255, 246, 189));
 
-        addBUTT.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addBUTTMouseClicked(evt);
-            }
-        });
         addBUTT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addBUTTActionPerformed(evt);
@@ -95,19 +130,6 @@ public class MaplistGUI extends javax.swing.JFrame {
                 closeBUTT1ActionPerformed(evt);
             }
         });
-
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 489, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 429, Short.MAX_VALUE)
-        );
 
         javax.swing.GroupLayout listPanelLayout = new javax.swing.GroupLayout(listPanel);
         listPanel.setLayout(listPanelLayout);
@@ -130,12 +152,12 @@ public class MaplistGUI extends javax.swing.JFrame {
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(backgroundLayout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(inputPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(inputPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(map, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backgroundLayout.createSequentialGroup()
@@ -161,14 +183,13 @@ public class MaplistGUI extends javax.swing.JFrame {
                                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(inputPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(50, 50, 50)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(map, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(backgroundLayout.createSequentialGroup()
                         .addContainerGap(42, Short.MAX_VALUE)
-                        .addComponent(listPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(addBUTT, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(listPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(12, 12, 12)
+                .addComponent(addBUTT, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -186,68 +207,61 @@ public class MaplistGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addBUTTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBUTTMouseClicked
-    }//GEN-LAST:event_addBUTTMouseClicked
-
     private void closeBUTT1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeBUTT1ActionPerformed
-        // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_closeBUTT1ActionPerformed
 
     private void addBUTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBUTTActionPerformed
-        // TODO add your handling code here:
         addNewPanel();
     }//GEN-LAST:event_addBUTTActionPerformed
+
     private int panelCount = 0;
     private JScrollPane scrollPane; // JScrollPane 변수 추가
-    
+
     private void initScrollPane() {
         scrollPane = new JScrollPane(listPanel);
         scrollPane.setBounds(listPanel.getBounds()); // listPanel과 같은 위치와 크기로 설정
-        
+
         // listPanel을 JScrollPane의 Viewport에 설정
         scrollPane.setViewportView(listPanel);
 
-    // 스크롤 바를 투명하게 설정
+        // 스크롤 바를 투명하게 설정
         scrollPane.getViewport().setOpaque(false);
         scrollPane.setOpaque(false);
         scrollPane.setBorder(null);
 
-        
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         //scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED); //가로스크롤바 필요시 표시       
         background.add(scrollPane);
-}
-    
+    }
+
     private void addNewPanel() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         //panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
         panel.setMaximumSize(new Dimension(600, 60));
-               
-         String imagePath = "/image/check_14025690.png";
+
+        String imagePath = "/image/check_14025690.png";
         ImageIcon icon = new ImageIcon(getClass().getResource(imagePath));
         Image scaledImage = icon.getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         JLabel label = new JLabel(scaledIcon);
-        
-        JTextField textField = new JTextField(45);
-         textField.setPreferredSize(new Dimension(400, 60)); // 원하는 크기로 조정 (가로, 세로)
 
-               
+        JTextField textField = new JTextField(45);
+        textField.setPreferredSize(new Dimension(400, 60)); // 원하는 크기로 조정 (가로, 세로)
+
         panel.add(label);
         panel.add(Box.createRigidArea(new Dimension(15, 0))); // 간격을 더해줌
-        panel.add(textField);                
+        panel.add(textField);
 
         listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS)); // listPanel의 레이아웃을 BoxLayout으로 설정
         listPanel.add(panel);
         listPanel.add(Box.createRigidArea(new Dimension(0, 20))); // 텍스트 필드 간의 간격                   
-                
-        
+
         listPanel.revalidate(); // 프레임을 다시 그리기
         scrollPane.revalidate(); // 스크롤바 갱신
-        panelCount++;      
-}
-    
+        panelCount++;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBUTT;
     private javax.swing.JPanel background;
@@ -255,7 +269,7 @@ public class MaplistGUI extends javax.swing.JFrame {
     private javax.swing.JTextField inputPosition;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel listPanel;
+    private javax.swing.JLabel map;
     // End of variables declaration//GEN-END:variables
 }

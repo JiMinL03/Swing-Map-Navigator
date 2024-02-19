@@ -12,6 +12,8 @@ com\mycompany\journeymate\GUI\MaplistGUI$2.class
 com\mycompany\journeymate\DB\Controller\RegisterController.class
 com\mycompany\journeymate\GUI\LoginGUI$2.class
 com\mycompany\journeymate\DB\Controller\LoginController.class
+com\mycompany\journeymate\API\StaticMap.class
 com\mycompany\journeymate\GUI\RegisterGUI$2.class
+com\mycompany\journeymate\API\Geocoding.class
 com\mycompany\journeymate\GUI\LoginGUI$1.class
 com\mycompany\journeymate\GUI\LoginGUI.class
