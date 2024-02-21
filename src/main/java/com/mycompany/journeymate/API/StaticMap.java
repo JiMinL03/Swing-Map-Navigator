@@ -10,12 +10,11 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 public class StaticMap {
-    public String downloadMap(ArrayList<Double> coordinates) {
+    public String downloadMap(ArrayList<Double> coordinates, int zoomLevel) {
         //geocoding API로부터 얻어온 위도 경도 좌표를 통해 지도 이미지를 다운로드하여 파일에 업로드한다.
         String location;
         double latitude = coordinates.get(0);
         double longitude = coordinates.get(1);
-        int zoomLevel = coordinates.get(2).intValue();
         location = latitude + "," + longitude;
         try {
             String apiKey = "AIzaSyB7Vp44RWD32nERlbCmrWCB9dfzvzf6OfA";
