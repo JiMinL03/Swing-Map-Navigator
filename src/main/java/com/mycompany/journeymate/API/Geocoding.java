@@ -39,16 +39,17 @@ public class Geocoding {
                 JSONObject object = new JSONObject(tokener);
                 //System.out.println(object.toString());
                 JSONArray resultsArray = object.getJSONArray("results");
-                JSONObject firstResult = resultsArray.getJSONObject(0); // Assuming there's at least one result
+                JSONObject firstResult = resultsArray.getJSONObject(0);
                 JSONObject geometry = firstResult.getJSONObject("geometry");
                 JSONObject printIocation = geometry.getJSONObject("location");
-
-                double latitude = printIocation.getDouble("lat");
-                double longitude = printIocation.getDouble("lng");
-                coordinates.add(latitude);
-                coordinates.add(longitude);
-                coordinates.add(countZoomlevel(resultsArray));
-
+                
+                if(checkBuilding(resultsArray) == 16){
+                    double latitude = printIocation.getDouble("lat");
+                    double longitude = printIocation.getDouble("lng");
+                    coordinates.add(latitude);
+                    coordinates.add(longitude);
+                    coordinates.add(checkBuilding(resultsArray));
+                }
             } else {
                 System.out.println("HTTP error: " + responseCode);
             }
@@ -58,11 +59,8 @@ public class Geocoding {
         return coordinates;
     }
 
-    private double countZoomlevel(JSONArray resultsArray) {
-//검색한 위치의 도시, 건물, 대륙 여부를 확인하고 그에 맞는 줌 레벨을 리턴한다.
+    private double checkBuilding(JSONArray resultsArray) {
         double zoomLevel = 0;
-        boolean cityFound = false;
-        boolean buildingFound = false;
         for (int i = 0; i < resultsArray.length(); i++) {
             JSONObject result = resultsArray.getJSONObject(i);
             JSONArray addressComponents = result.getJSONArray("address_components");
@@ -72,30 +70,13 @@ public class Geocoding {
 
                 for (int k = 0; k < types.length(); k++) {
                     String type = types.getString(k);
-                    System.out.println("Type: " + type); // 디버그 출력 추가
-                    if (type.equals("locality") || type.equals("political")) {
-                        // 도시인 경우 줌 레벨 10
-                        zoomLevel = 10;
-                        cityFound = true;
-                        break;
-                    } else if (type.equals("street_address") || type.equals("premise")) {
+                    if (type.equals("street_address") || type.equals("premise")) {
                         // 건물인 경우 줌 레벨 16
                         zoomLevel = 16;
-                        buildingFound = true;
-                        break;
-                    } else if (type.equals("country")) {
-                        // 나라인 경우 줌 레벨 5
-                        zoomLevel = 5;
                         break;
                     }
                 }
-                if (cityFound || buildingFound) {
-                    break;
-                }
             }
-        }
-        if (!cityFound && !buildingFound) {
-            zoomLevel = 5;
         }
         return zoomLevel;
     }
