@@ -4,21 +4,24 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 public class StaticMap {
-    public String downloadMap(ArrayList<Double> coordinates, int zoomLevel) {
+    public String downloadMap(ArrayList<Double> coordinates, int zoomLevel) throws UnsupportedEncodingException {
         //geocoding API로부터 얻어온 위도 경도 좌표를 통해 지도 이미지를 다운로드하여 파일에 업로드한다.
         String location;
         double latitude = coordinates.get(0);
         double longitude = coordinates.get(1);
         location = latitude + "," + longitude;
+        String encodedLocation = URLEncoder.encode(location, "UTF-8");
         try {
             String apiKey = "AIzaSyB7Vp44RWD32nERlbCmrWCB9dfzvzf6OfA";
-            String imamgeUrl = "https://maps.googleapis.com/maps/api/staticmap?center=" + URLEncoder.encode(location, "UTF-8") + "&zoom=" + zoomLevel + "&size=400x400&key=" + apiKey;
+            //+"&markers=color:red%7Clabel:A%7C37.7749,-122.4194"+encodedLocation
+            String imamgeUrl = "https://maps.googleapis.com/maps/api/staticmap?center=" + encodedLocation + "&zoom=" + zoomLevel + "&size=400x400&scale=2&format=png&markers=" + encodedLocation +"&key=" + apiKey;
             URL url = new URL(imamgeUrl);
             InputStream is = url.openStream();
             OutputStream os = new FileOutputStream(location);
