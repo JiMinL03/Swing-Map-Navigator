@@ -5,6 +5,7 @@ com\mycompany\journeymate\GUI\RegisterGUI.class
 com\mycompany\journeymate\GUI\LoginGUI$3.class
 com\mycompany\journeymate\DB\Respository\UserRespository.class
 com\mycompany\journeymate\GUI\RegisterGUI$1.class
+com\mycompany\journeymate\GUI\MaplistGUI$6.class
 com\mycompany\journeymate\JourneyMate.class
 com\mycompany\journeymate\GUI\MaplistGUI$1.class
 com\mycompany\journeymate\DB\Service\UserService.class

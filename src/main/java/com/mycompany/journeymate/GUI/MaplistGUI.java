@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class MaplistGUI extends javax.swing.JFrame {
@@ -140,6 +142,8 @@ public class MaplistGUI extends javax.swing.JFrame {
                 closeBUTT1ActionPerformed(evt);
             }
         });
+
+        listPanel.setOpaque(false);
 
         javax.swing.GroupLayout listPanelLayout = new javax.swing.GroupLayout(listPanel);
         listPanel.setLayout(listPanelLayout);
@@ -305,12 +309,11 @@ public class MaplistGUI extends javax.swing.JFrame {
         //scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED); //가로스크롤바 필요시 표시       
         background.add(scrollPane);
     }
-
+    
     private void addNewPanel() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        //panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
         panel.setMaximumSize(new Dimension(600, 60));
-
+        panel.setOpaque(false);
         String imagePath = "/image/check_14025690.png";
         ImageIcon icon = new ImageIcon(getClass().getResource(imagePath));
         Image scaledImage = icon.getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH);
@@ -319,11 +322,21 @@ public class MaplistGUI extends javax.swing.JFrame {
 
         JTextField textField = new JTextField(45);
         textField.setPreferredSize(new Dimension(400, 60)); // 원하는 크기로 조정 (가로, 세로)
+        String panelName = "panel" + panelCount;
+        panel.setName(panelName);
 
         panel.add(label);
         panel.add(Box.createRigidArea(new Dimension(15, 0))); // 간격을 더해줌
         panel.add(textField);
-
+        
+        panel.addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            // 클릭 이벤트에서 수행할 동작 정의
+            System.out.println("패널 " + panelName + "이 클릭되었습니다.");
+            // 여기에 클릭 이벤트에서 수행할 동작을 추가하세요.
+        }
+    });
         listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS)); // listPanel의 레이아웃을 BoxLayout으로 설정
         listPanel.add(panel);
         listPanel.add(Box.createRigidArea(new Dimension(0, 20))); // 텍스트 필드 간의 간격                   
