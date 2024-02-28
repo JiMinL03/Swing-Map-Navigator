@@ -1,32 +1,22 @@
 package com.mycompany.journeymate.GUI;
 
-import com.mycompany.journeymate.API.Geocoding;
-import com.mycompany.journeymate.API.StaticMap;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 
 public class MaplistGUI extends javax.swing.JFrame {
-
-    StaticMap showMap = new StaticMap();
-    Geocoding geo = new Geocoding();
-    int calculateZoomlevel = 0;
-    int zoomLevel;
-    String location = "동의대학교";
 
     public MaplistGUI() {
         setUndecorated(true);
         initComponents();
         swingGUI();
         initScrollPane();
-        addEnterKeyListener();
     }
 
     private void swingGUI() {
         fixingFrame();
-        addImageLabel();
-        addImageAddButt();
+        addImageButt();
+        image();
     }
 
     private void fixingFrame() {
@@ -37,67 +27,42 @@ public class MaplistGUI extends javax.swing.JFrame {
         setLocation(x, y);
     }
 
-    public void addImageAddButt() {
-        // 이미지 파일 경로
-        String imagePath = "/image/free-icon-add-148781.png";
-
-        // 이미지 아이콘 생성 및 크기 조절
-        ImageIcon icon = new ImageIcon(getClass().getResource(imagePath));
-        Image scaledImage = icon.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(scaledImage);
-
-        // 아이콘을 버튼에 적용
-        addBUTT.setIcon(scaledIcon);
-
-        // 버튼의 배경과 테두리 제거
-        addBUTT.setContentAreaFilled(false);
-        addBUTT.setBorderPainted(false);
-
-    }
-
-    public void addImageLabel() { //label에 아이콘 넣는 메서드
-        String imagePath = "/image/free-icon-user-8801434.png";
+    private void image() {//label에 아이콘 넣는 메서드
+        String imagePath = "/image/free-icon-placeholder-2536611.png";
         ImageIcon icon = new ImageIcon(getClass().getResource(imagePath));
 
-        Image scaledImage = icon.getImage().getScaledInstance(45, 41, Image.SCALE_SMOOTH);
+        int width = 79;
+        int height = 73;
+
+        Image scaledImage = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
 
         jLabel1.setHorizontalAlignment(JLabel.CENTER);  // 가운데 정렬
         jLabel1.setVerticalAlignment(JLabel.CENTER);  // 가운데 정렬
         jLabel1.setIcon(scaledIcon);  // 아이콘 설정
-
     }
 
-    private void addEnterKeyListener() {
-        inputPosition.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // 여기에 Enter 키 입력에 대한 액션을 추가
-                location = inputPosition.getText();
-                if (!location.equals("")) {
-                    setMap(location, calculateZoomlevel);
-                } else {
-                    JOptionPane.showMessageDialog(null, "주소 정보를 입력해주세요.", "알림", JOptionPane.INFORMATION_MESSAGE);
-                }
-            }
-        });
+    public void addImageButt() {
+        String imagePath = "/image/free-icon-add-148781.png";
+        ImageIcon icon = new ImageIcon(getClass().getResource(imagePath));
+        Image scaledImage = icon.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+        addBUTT.setIcon(scaledIcon);
+
+        imagePath = "/image/check_14025690.png";
+        icon = new ImageIcon(getClass().getResource(imagePath));
+        scaledImage = icon.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+        scaledIcon = new ImageIcon(scaledImage);
+        endButt2.setIcon(scaledIcon);
+        cssButt();
     }
 
-    public void setMap(String location, int calculateZoomlevel) {
-        try {
-            ArrayList<Double> coordinates = geo.geocode(location);
-            this.zoomLevel = coordinates.get(2).intValue();
-            if (calculateZoomlevel != 0) {
-                this.zoomLevel = calculateZoomlevel;
-            }
-            showMap.downloadMap(geo.geocode(location), zoomLevel);
-            ImageIcon mapIcon = showMap.getMap(showMap.downloadMap(geo.geocode(location), zoomLevel));
-            map.setIcon(mapIcon);
-            showMap.fileDelete(showMap.downloadMap(geo.geocode(location), zoomLevel));
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "정확한 건물명을 입력해주세요.", "알림", JOptionPane.INFORMATION_MESSAGE);
-        }
+    private void cssButt() {
+        addBUTT.setContentAreaFilled(false);
+        addBUTT.setBorderPainted(false);
+        endButt2.setOpaque(false);
+        endButt2.setContentAreaFilled(false);
+        endButt2.setBorderPainted(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -107,14 +72,13 @@ public class MaplistGUI extends javax.swing.JFrame {
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         background = new javax.swing.JPanel();
         addBUTT = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         closeBUTT1 = new javax.swing.JButton();
         listPanel = new javax.swing.JPanel();
-        inputPosition = new javax.swing.JTextField();
-        map = new javax.swing.JLabel();
-        zoomInButt = new javax.swing.JButton();
-        zoomOutButt = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        endButt = new javax.swing.JButton();
+        endButt1 = new javax.swing.JButton();
+        endButt2 = new javax.swing.JButton();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -128,8 +92,6 @@ public class MaplistGUI extends javax.swing.JFrame {
                 addBUTTActionPerformed(evt);
             }
         });
-
-        jLabel1.setName("image"); // NOI18N
 
         closeBUTT1.setBackground(new java.awt.Color(242, 242, 242));
         closeBUTT1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -148,103 +110,98 @@ public class MaplistGUI extends javax.swing.JFrame {
         listPanel.setLayout(listPanelLayout);
         listPanelLayout.setHorizontalGroup(
             listPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 559, Short.MAX_VALUE)
+            .addGap(0, 454, Short.MAX_VALUE)
         );
         listPanelLayout.setVerticalGroup(
             listPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 571, Short.MAX_VALUE)
+            .addGap(0, 495, Short.MAX_VALUE)
         );
 
-        inputPosition.setFont(new java.awt.Font("HY중고딕", 1, 18)); // NOI18N
-        inputPosition.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(51, 204, 0)));
-        inputPosition.setOpaque(false);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 543, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 565, Short.MAX_VALUE)
+        );
 
-        zoomInButt.setBackground(new java.awt.Color(246, 215, 118));
-        zoomInButt.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        zoomInButt.setForeground(new java.awt.Color(51, 153, 0));
-        zoomInButt.setText("+");
-        zoomInButt.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.lightGray, null, null));
-        zoomInButt.setOpaque(false);
-        zoomInButt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                zoomInButtActionPerformed(evt);
-            }
-        });
+        endButt.setBorder(null);
+        endButt.setOpaque(false);
 
-        zoomOutButt.setBackground(new java.awt.Color(246, 215, 118));
-        zoomOutButt.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        zoomOutButt.setForeground(new java.awt.Color(51, 153, 0));
-        zoomOutButt.setText("-");
-        zoomOutButt.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.lightGray, null, null));
-        zoomOutButt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        zoomOutButt.setOpaque(false);
-        zoomOutButt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                zoomOutButtActionPerformed(evt);
-            }
-        });
+        endButt1.setBorder(null);
+        endButt1.setOpaque(false);
 
-        jLabel2.setForeground(new java.awt.Color(0, 153, 0));
-        jLabel2.setText("추가하실 건물명을 입력해주세요.");
+        endButt2.setBorder(null);
+        endButt2.setOpaque(false);
 
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
         background.setLayout(backgroundLayout);
         backgroundLayout.setHorizontalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundLayout.createSequentialGroup()
-                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, backgroundLayout.createSequentialGroup()
-                        .addGap(166, 166, 166)
-                        .addComponent(zoomInButt, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(53, 53, 53)
-                        .addComponent(zoomOutButt, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(backgroundLayout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(map, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(backgroundLayout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(inputPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel2))))
+                .addGap(33, 33, 33)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backgroundLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 564, Short.MAX_VALUE)
-                        .addComponent(closeBUTT1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(addBUTT, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(endButt2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(backgroundLayout.createSequentialGroup()
                         .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(listPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(backgroundLayout.createSequentialGroup()
-                                .addGap(534, 534, 534)
-                                .addComponent(addBUTT, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(backgroundLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(listPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGap(185, 185, 185)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(closeBUTT1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37))))))
+            .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(backgroundLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(endButt)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(backgroundLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(endButt1)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundLayout.createSequentialGroup()
-                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(backgroundLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2)
-                        .addGap(4, 4, 4)
-                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(inputPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(map, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(53, 53, 53)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(backgroundLayout.createSequentialGroup()
-                        .addComponent(closeBUTT1)
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(listPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(addBUTT, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(zoomOutButt, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(zoomInButt, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(addBUTT, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(endButt2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(24, 24, 24))
+            .addGroup(backgroundLayout.createSequentialGroup()
+                .addComponent(closeBUTT1)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(backgroundLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(endButt)
+                    .addGap(0, 516, Short.MAX_VALUE)))
+            .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(backgroundLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(endButt1)
+                    .addGap(0, 516, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -255,7 +212,7 @@ public class MaplistGUI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(background, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(background, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -268,26 +225,6 @@ public class MaplistGUI extends javax.swing.JFrame {
     private void addBUTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBUTTActionPerformed
         addNewPanel();
     }//GEN-LAST:event_addBUTTActionPerformed
-
-    private void zoomInButtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zoomInButtActionPerformed
-        String location = inputPosition.getText();
-        if (!location.equals("")) {
-            calculateZoomlevel = 2;
-            setMap(location, this.zoomLevel + calculateZoomlevel);
-        } else {
-            JOptionPane.showMessageDialog(null, "주소 정보를 입력해주세요.", "알림", JOptionPane.INFORMATION_MESSAGE);
-        }
-    }//GEN-LAST:event_zoomInButtActionPerformed
-
-    private void zoomOutButtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zoomOutButtActionPerformed
-        String location = inputPosition.getText();
-        if (!location.equals("")) {
-            calculateZoomlevel = -2;
-            setMap(location, this.zoomLevel + calculateZoomlevel);
-        } else {
-            JOptionPane.showMessageDialog(null, "주소 정보를 입력해주세요.", "알림", JOptionPane.INFORMATION_MESSAGE);
-        }
-    }//GEN-LAST:event_zoomOutButtActionPerformed
 
     private int panelCount = 0;
     private JScrollPane scrollPane; // JScrollPane 변수 추가
@@ -348,31 +285,36 @@ public class MaplistGUI extends javax.swing.JFrame {
         panel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                InputMaplistGUI InputMaplist = new InputMaplistGUI(panel.getName());
-                InputMaplist.setVisible(true);
-                dispose();
+                if (textField.getText().equals("")) {
+                    InputMaplistGUI InputMaplist = new InputMaplistGUI(panel.getName());
+                    InputMaplist.setVisible(true);
+                    dispose();
+                }
+                else{
+                    
+                }
             }
         });
-
         return panel;
     }
 
     private JTextField createTextField() {
         JTextField textField = new JTextField(45);
         textField.setPreferredSize(new Dimension(400, 60));
+        textField.setEditable(false);
+        textField.setBackground(Color.WHITE);
         return textField;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBUTT;
     private javax.swing.JPanel background;
     private javax.swing.JButton closeBUTT1;
-    private javax.swing.JTextField inputPosition;
+    private javax.swing.JButton endButt;
+    private javax.swing.JButton endButt1;
+    private javax.swing.JButton endButt2;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel listPanel;
-    private javax.swing.JLabel map;
-    private javax.swing.JButton zoomInButt;
-    private javax.swing.JButton zoomOutButt;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 public class InputMaplistGUI extends javax.swing.JFrame {
-
+    
     StaticMap showMap = new StaticMap();
     Geocoding geo = new Geocoding();
     String panelName;
@@ -23,8 +23,9 @@ public class InputMaplistGUI extends javax.swing.JFrame {
         swingGUI();
         addEnterKeyListener();
         initScrollPane();
+        textfield(inputTitle);
+        textfield(inputPosition);
     }
-
     private void swingGUI() {
         fixingFrame();
         addImageLabel();
@@ -32,7 +33,6 @@ public class InputMaplistGUI extends javax.swing.JFrame {
         coustombutton();
         inputTitle.setHorizontalAlignment(JTextField.CENTER);
     }
-
     private void fixingFrame() {
         setResizable(false);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -40,7 +40,6 @@ public class InputMaplistGUI extends javax.swing.JFrame {
         int y = (screenSize.height - getHeight()) / 2;
         setLocation(x, y);
     }
-
     private void addImageLabel() { //label에 아이콘 넣는 메서드
         String imagePath = "/image/free-icon-user-8801434.png";
         ImageIcon icon = new ImageIcon(getClass().getResource(imagePath));
@@ -52,7 +51,6 @@ public class InputMaplistGUI extends javax.swing.JFrame {
         jLabel1.setVerticalAlignment(JLabel.CENTER);  // 가운데 정렬
         jLabel1.setIcon(scaledIcon);  // 아이콘 설정
     }
-
     public void addImageButt() {
         String imagePath = "/image/free-icon-add-148781.png";
         ImageIcon icon = new ImageIcon(getClass().getResource(imagePath));
@@ -65,8 +63,8 @@ public class InputMaplistGUI extends javax.swing.JFrame {
         scaledImage = icon.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
         scaledIcon = new ImageIcon(scaledImage);
         endButt.setIcon(scaledIcon);
+        checkButt.setIcon(scaledIcon);
     }
-
     public void coustombutton() {
         addBUTT.setOpaque(false);
         addBUTT.setContentAreaFilled(false);
@@ -75,8 +73,11 @@ public class InputMaplistGUI extends javax.swing.JFrame {
         endButt.setOpaque(false);
         endButt.setContentAreaFilled(false);
         endButt.setBorderPainted(false);
+        
+        checkButt.setOpaque(false);
+        checkButt.setContentAreaFilled(false);
+        checkButt.setBorderPainted(false);
     }
-
     private void addEnterKeyListener() {
         inputPosition.addActionListener(new ActionListener() {
             @Override
@@ -90,7 +91,6 @@ public class InputMaplistGUI extends javax.swing.JFrame {
             }
         });
     }
-
     public void setMap(String location, int calculateZoomlevel) {
         try {
             ArrayList<Double> coordinates = geo.geocode(location);
@@ -107,7 +107,6 @@ public class InputMaplistGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "정확한 건물명을 입력해주세요.", "알림", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -125,6 +124,8 @@ public class InputMaplistGUI extends javax.swing.JFrame {
         listPanel = new javax.swing.JPanel();
         inputTitle = new javax.swing.JTextField();
         endButt = new javax.swing.JButton();
+        checkButt = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         inputPosition1.setFont(new java.awt.Font("HY중고딕", 1, 18)); // NOI18N
         inputPosition1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(51, 204, 0)));
@@ -139,6 +140,7 @@ public class InputMaplistGUI extends javax.swing.JFrame {
         closeBUTT1.setForeground(new java.awt.Color(0, 153, 51));
         closeBUTT1.setText("X");
         closeBUTT1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        closeBUTT1.setOpaque(false);
         closeBUTT1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 closeBUTT1ActionPerformed(evt);
@@ -197,7 +199,7 @@ public class InputMaplistGUI extends javax.swing.JFrame {
         );
         listPanelLayout.setVerticalGroup(
             listPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 523, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         inputTitle.setFont(new java.awt.Font("HY중고딕", 1, 18)); // NOI18N
@@ -208,6 +210,18 @@ public class InputMaplistGUI extends javax.swing.JFrame {
 
         endButt.setBorder(null);
         endButt.setOpaque(false);
+
+        jButton1.setBackground(new java.awt.Color(242, 242, 242));
+        jButton1.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 153, 51));
+        jButton1.setText("<<");
+        jButton1.setBorder(null);
+        jButton1.setOpaque(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
         background.setLayout(backgroundLayout);
@@ -226,20 +240,26 @@ public class InputMaplistGUI extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(map, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(backgroundLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(inputTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(116, 116, 116)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(backgroundLayout.createSequentialGroup()
+                                .addComponent(inputTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(123, 123, 123))
+                            .addGroup(backgroundLayout.createSequentialGroup()
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addComponent(closeBUTT1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(backgroundLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
                         .addComponent(listPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 20, Short.MAX_VALUE))))
+                        .addContainerGap())))
             .addGroup(backgroundLayout.createSequentialGroup()
-                .addGap(183, 183, 183)
+                .addGap(128, 128, 128)
                 .addComponent(zoomInButt, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addGap(33, 33, 33)
+                .addComponent(checkButt, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
                 .addComponent(zoomOutButt, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(addBUTT, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -252,27 +272,36 @@ public class InputMaplistGUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backgroundLayout.createSequentialGroup()
-                        .addGap(4, 4, 4)
+                        .addGap(19, 19, 19)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(inputPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(inputTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(closeBUTT1))
+                    .addGroup(backgroundLayout.createSequentialGroup()
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(closeBUTT1)
+                            .addComponent(jButton1))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(listPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(map, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(zoomInButt, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(zoomOutButt, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(addBUTT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(endButt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(8, 8, 8))
+                    .addGroup(backgroundLayout.createSequentialGroup()
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(addBUTT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                            .addComponent(zoomOutButt, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(endButt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(8, 8, 8))
+                    .addGroup(backgroundLayout.createSequentialGroup()
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(checkButt, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(zoomInButt, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -319,7 +348,6 @@ public class InputMaplistGUI extends javax.swing.JFrame {
         scrollPane = createScrollPane();
         background.add(scrollPane);
     }
-
     private JScrollPane createScrollPane() {
         JScrollPane newScrollPane = new JScrollPane(listPanel);
         newScrollPane.setBounds(listPanel.getBounds());
@@ -329,7 +357,6 @@ public class InputMaplistGUI extends javax.swing.JFrame {
 
         return newScrollPane;
     }
-
     private void configureTransparentScrollPane(JScrollPane scrollPane) {
         scrollPane.getViewport().setOpaque(false);
         scrollPane.setOpaque(false);
@@ -337,56 +364,45 @@ public class InputMaplistGUI extends javax.swing.JFrame {
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         // scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED); // 가로스크롤바 필요시 표시
     }
-
     private void addNewPanel() {
         JPanel panel = createPanel();
         listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
         listPanel.add(panel);
-        listPanel.add(Box.createRigidArea(new Dimension(0, 50)));
+        listPanel.add(Box.createRigidArea(new Dimension(0, 30)));
 
         revalidateComponents();
         panelCount++;
     }
-
     private JPanel createPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setMaximumSize(new Dimension(450, 70));
+        panel.setMaximumSize(new Dimension(450, 100));
         panel.setOpaque(false);
 
-
-        JTextField inputLocation = createTextField(450, 40, "위치를 입력하여 버튼을 눌러주세요.", "inputLocation");
-        JTextField memo = createTextField(450, 30, "", "");
+        JTextField inputLocation = createTextField(450, 60, "위치를 입력해주세요.", "inputLocation");
+        JTextField memo = createTextField(450, 40, "", "");
 
         panel.add(inputLocation);
         panel.add(memo);
-
-        addPanelMouseListener(panel);
-        
-        System.out.println(inputLocation.getName());
         return panel;
     }
-
     private JTextField createTextField(int width, int height, String text, String name) {
         JTextField textField = new JTextField();
         textField.setPreferredSize(new Dimension(width, height));
         textField.setText(text);
         textField.setName(name + panelCount);
+        
+        textfield(textField);
         return textField;
     }
-
-    private void addPanelMouseListener(JPanel panel) {
-        String panelName = "panel" + panelCount;
-        panel.setName(panelName);
-
-        panel.addMouseListener(new MouseAdapter() {
+    private void textfield(JTextField textField){
+        textField.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("패널 " + panelName + "이 클릭되었습니다.");
+                textField.setText("");
             }
         });
     }
-
     private void revalidateComponents() {
         listPanel.revalidate();
         scrollPane.revalidate();
@@ -395,15 +411,22 @@ public class InputMaplistGUI extends javax.swing.JFrame {
         addNewPanel();
     }//GEN-LAST:event_addBUTTActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        MaplistGUI Maplist = new MaplistGUI();
+        Maplist.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBUTT;
     private javax.swing.JPanel background;
+    private javax.swing.JButton checkButt;
     private javax.swing.JButton closeBUTT1;
     private javax.swing.JButton endButt;
     private javax.swing.JTextField inputPosition;
     private javax.swing.JTextField inputPosition1;
     private javax.swing.JTextField inputTitle;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel listPanel;
