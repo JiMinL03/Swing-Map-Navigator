@@ -1,10 +1,15 @@
 package com.mycompany.journeymate.DB.Controller;
 
 import com.mycompany.journeymate.DB.DTO.UserDTO;
+import com.mycompany.journeymate.DB.Respository.Connect;
 import com.mycompany.journeymate.DB.Respository.UserRespository;
+import java.sql.Connection;
 import java.util.ArrayList;
 
 public class LoginController {
+
+    private Connect connect;
+    private Connection connection;
 
     private UserRespository respository;
     boolean resultMessage;
@@ -12,10 +17,17 @@ public class LoginController {
     public LoginController(ArrayList<String> data) { //registerGUI에서 받은 데이터들을 넘겨온다.
         UserDTO userDTO = new UserDTO(data);
         respository = new UserRespository(userDTO);
-        respository.connect();
+
+        connect = Connect.getInstance();
+        connection = connect.getConnection();
+
         respository.createUserTable();
         resultMessage = respository.checkLogin();
-        respository.closeConnection();
+
+        if (connect != null) {
+            respository.createUserTable();
+            resultMessage = respository.checkLogin();
+        }
     }
 
     public String toMessage() {
