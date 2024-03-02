@@ -2,7 +2,6 @@ package com.mycompany.journeymate.DB.Respository;
 
 import com.mycompany.journeymate.DB.DTO.UserDTO;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,6 +15,9 @@ public class UserRespository { //데이터 액세스 로직을 캡슐화, 직접
     private String mail;
     private String name;
 
+    private Connect connect;
+    private Connection connection;
+
     public UserRespository(UserDTO userDTO) {
         this.userDTO = userDTO;
 
@@ -23,24 +25,12 @@ public class UserRespository { //데이터 액세스 로직을 캡슐화, 직접
         this.pw = userDTO.getPw();
         this.mail = userDTO.getMail();
         this.name = userDTO.getName();
+
+        connect = Connect.getInstance();
+        connection = connect.getConnection();
     }
-
-    String url = "jdbc:mariadb://localhost:3306/JourneyMate";
-    String user = "root";
-    String password = "JiMinL"; //358935
-    private Connection connection;
-
-    public void connect() { //DB 연결
-        try {
-            Class.forName("org.mariadb.jdbc.Driver");
-            connection = DriverManager.getConnection(url, user, password);
-        } catch (ClassNotFoundException | SQLException e) {
-            System.out.println("connect error");
-        }
-    }
-
     public void createUserTable() {//user 테이블 생성
-        String createTableQuery = "CREATE TABLE IF NOT EXISTS user (id VARCHAR(255), name TEXT, mail TEXT, password TEXT)";
+        String createTableQuery = "CREATE TABLE IF NOT EXISTS user (id VARCHAR(255) PRIMARY KEY, name TEXT, mail TEXT, password TEXT)";
         try (Statement statement = connection.createStatement()) {
             statement.execute(createTableQuery);
             System.out.println("Table created successfully.");
@@ -48,7 +38,6 @@ public class UserRespository { //데이터 액세스 로직을 캡슐화, 직접
             System.out.println("createUserTable error");
         }
     }
-
     public boolean checkOverlapId() {//중복된 아이디 확인
         String checkOverlapId = "SELECT id FROM user WHERE id = '" + id + "'";
         try (Statement statement = connection.createStatement()) {
@@ -87,7 +76,7 @@ public class UserRespository { //데이터 액세스 로직을 캡슐화, 직접
         }
     }
 
-    public boolean checkLogin() {//중복된 아이디 확인
+    public boolean checkLogin() {//아이디 비번 확인
         String checkLogin = "SELECT id, password FROM user WHERE id = ? AND password = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(checkLogin)) {
             preparedStatement.setString(1, id);
@@ -110,15 +99,5 @@ public class UserRespository { //데이터 액세스 로직을 캡슐화, 직접
             System.out.println("Login Error");
         }
         return true;
-    }
-
-    public void closeConnection() { //DB 연결 종료
-        try {
-            if (connection != null && !connection.isClosed()) {
-                connection.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 }

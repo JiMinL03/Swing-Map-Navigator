@@ -229,8 +229,7 @@ public class LoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void closeBUTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeBUTTActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
+       System.exit(0);
     }//GEN-LAST:event_closeBUTTActionPerformed
 
     private void loginButtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtActionPerformed
@@ -239,7 +238,7 @@ public class LoginGUI extends javax.swing.JFrame {
             LoginController user = new LoginController(dataToSend);
             JOptionPane.showMessageDialog(null, user.toMessage(), "알림", JOptionPane.INFORMATION_MESSAGE);
             if (user.toMessage().equals("다시 만나서 반가워요!")) {
-                MaplistGUI map = new MaplistGUI();
+                MaplistGUI map = new MaplistGUI(idInput.getText());
                 map.setVisible(true);
                 dispose();
             }
