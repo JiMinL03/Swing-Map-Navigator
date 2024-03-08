@@ -3,6 +3,7 @@ package com.mycompany.journeymate.DB.DTO;
 import java.util.ArrayList;
 
 public class UserDataDTO {
+
     private String id;
     private String Title;
     private ArrayList<String> location;
@@ -17,6 +18,10 @@ public class UserDataDTO {
         this.memo = returnArraylist.get(1);
         this.startTime = returnArraylist.get(2);
         this.endTime = returnArraylist.get(3);
+    }
+
+    public UserDataDTO(String id) {
+        this.id = id;
     }
 
     public String getId() {

@@ -1,19 +1,24 @@
 package com.mycompany.journeymate.GUI;
 
+import com.mycompany.journeymate.DB.DTO.UserDataDTO;
+import com.mycompany.journeymate.DB.Respository.UserDataRespository;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class MaplistGUI extends javax.swing.JFrame {
     String idInput;
+    InputMaplistGUI InputMaplist = new InputMaplistGUI(idInput);
     public MaplistGUI(String idInput) {
         this.idInput = idInput;
         setUndecorated(true);
         initComponents();
         swingGUI();
         initScrollPane();
+        updatePanel();
     }
-
+    
     private void swingGUI() {
         fixingFrame();
         addImageButt();
@@ -65,7 +70,15 @@ public class MaplistGUI extends javax.swing.JFrame {
         endButt2.setContentAreaFilled(false);
         endButt2.setBorderPainted(false);
     }
-
+    
+    private void updatePanel() {
+        UserDataDTO userData = new UserDataDTO(idInput);
+        UserDataRespository respository = new UserDataRespository(userData);
+        for(int i =0; i<respository.returnTitle().size(); i++){
+            String message = respository.returnTitle().get(i);
+            addNewPanel(message);
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -219,13 +232,12 @@ public class MaplistGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_closeBUTT1ActionPerformed
 
     private void addBUTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBUTTActionPerformed
-        InputMaplistGUI InputMaplist = new InputMaplistGUI(idInput);
         InputMaplist.setVisible(true);
         dispose();
     }//GEN-LAST:event_addBUTTActionPerformed
 
     private int panelCount = 0;
-    private JScrollPane scrollPane; // JScrollPane 변수 추가
+    private JScrollPane scrollPane;
 
     private void initScrollPane() {
         scrollPane = createScrollPane();
@@ -236,22 +248,19 @@ public class MaplistGUI extends javax.swing.JFrame {
         JScrollPane newScrollPane = new JScrollPane(listPanel);
         newScrollPane.setBounds(listPanel.getBounds());
 
-        // listPanel을 JScrollPane의 Viewport에 설정
         newScrollPane.setViewportView(listPanel);
 
-        // 스크롤 바를 투명하게 설정
         newScrollPane.getViewport().setOpaque(false);
         newScrollPane.setOpaque(false);
         newScrollPane.setBorder(null);
 
         newScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         // newScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED); //가로스크롤바 필요시 표시
-
         return newScrollPane;
     }
 
-    private void addNewPanel() {
-        JPanel panel = createPanel();
+    private void addNewPanel(String message) {
+        JPanel panel = createPanel(message);
         listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
         listPanel.add(panel);
         listPanel.add(Box.createRigidArea(new Dimension(0, 20)));
@@ -260,9 +269,9 @@ public class MaplistGUI extends javax.swing.JFrame {
         panelCount++;
     }
 
-    private JPanel createPanel() {
+    private JPanel createPanel(String message) {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        panel.setMaximumSize(new Dimension(600, 60));
+        panel.setMaximumSize(new Dimension(600, 50));
         panel.setOpaque(false);
 
         String imagePath = "/image/check_14025690.png";
@@ -272,6 +281,7 @@ public class MaplistGUI extends javax.swing.JFrame {
         JLabel label = new JLabel(scaledIcon);
 
         JTextField textField = createTextField();
+        textField.setText(message);
         String panelName = "panel" + panelCount;
         panel.setName(panelName);
 
@@ -289,10 +299,12 @@ public class MaplistGUI extends javax.swing.JFrame {
     }
 
     private JTextField createTextField() {
-        JTextField textField = new JTextField(45);
-        textField.setPreferredSize(new Dimension(400, 60));
+        JTextField textField = new JTextField(25);
+        textField.setPreferredSize(new Dimension(600, 50));
         textField.setEditable(false);
         textField.setBackground(Color.WHITE);
+        Font font = new Font("Courier", Font.BOLD,18);
+        textField.setFont(font);
         return textField;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

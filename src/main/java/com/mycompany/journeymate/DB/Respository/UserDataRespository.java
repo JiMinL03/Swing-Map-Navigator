@@ -3,11 +3,9 @@ package com.mycompany.journeymate.DB.Respository;
 import com.mycompany.journeymate.DB.DTO.UserDataDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class UserDataRespository {//데이터 액세스 로직을 캡슐화, 직접적인 데이터 접근
@@ -33,10 +31,9 @@ public class UserDataRespository {//데이터 액세스 로직을 캡슐화, 직
         connect = Connect.getInstance();
         connection = connect.getConnection();
     }
-
     public void UserDataRespository() {
         createUserTable();
-        inputUseData();
+        inputUserData();
     }
 
     private void createUserTable() {//로그인 id를 키값으로 연장선 테이블 생성
@@ -50,9 +47,9 @@ public class UserDataRespository {//데이터 액세스 로직을 캡슐화, 직
         }
     }
 
-    private void inputUseData() {//회원가입 정보 DB에 입력
-        String inputRegisterData = "INSERT INTO " + userDataDTO.getId() + " (title, location, memo, start_time, end_time, user_id) VALUES (?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(inputRegisterData)) {
+    private void inputUserData() {//회원가입 정보 DB에 입력
+        String inputUserData = "INSERT INTO " + userDataDTO.getId() + " (title, location, memo, start_time, end_time, user_id) VALUES (?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(inputUserData)) {
             for (int i = 0; i < location.size(); i++) {
                 preparedStatement.setString(1, title);
                 preparedStatement.setString(2, location.get(i));
@@ -67,5 +64,20 @@ public class UserDataRespository {//데이터 액세스 로직을 캡슐화, 직
             System.out.println("inputRegisterData error");
             e.printStackTrace();
         }
+    }
+
+    public ArrayList<String> returnTitle() {
+        ArrayList<String> titleList = new ArrayList<>();
+        String returnTitle = "SELECT title FROM " + userDataDTO.getId();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(returnTitle)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String title = resultSet.getString(1);
+                titleList.add(title);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return titleList;
     }
 }
