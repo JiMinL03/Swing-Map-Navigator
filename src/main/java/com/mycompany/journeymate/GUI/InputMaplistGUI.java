@@ -3,7 +3,6 @@ package com.mycompany.journeymate.GUI;
 import com.mycompany.journeymate.API.Geocoding;
 import com.mycompany.journeymate.API.StaticMap;
 import com.mycompany.journeymate.DB.Controller.UserDataController;
-import com.mycompany.journeymate.DB.DTO.UserDataDTO;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -38,6 +37,7 @@ public class InputMaplistGUI extends javax.swing.JFrame {
     }
 
     private void swingGUI() {
+        inputTitle.setVisible(false);
         fixingFrame();
         addImageLabel();
         addImageButt();
@@ -94,8 +94,12 @@ public class InputMaplistGUI extends javax.swing.JFrame {
             }
         });
     }
+    boolean setInputTitle = false;
 
     private void handleInput() {
+        if (!setInputTitle) {
+            inputTitle.setVisible(true);
+        }
         location = inputPosition.getText();
         if (!location.equals("")) {
             setMap(location, calculateZoomlevel);
@@ -339,11 +343,11 @@ public class InputMaplistGUI extends javax.swing.JFrame {
 
         JTextField inputLocation = createTextField(510, 60, "위치를 입력해주세요.", "inputLocation");
         JTextField inputMemo = createTextField(510, 40, "", "");
-        
+
         if (!isExceptionOccurred) {
-        setLocationText(inputLocation, location);
+            setLocationText(inputLocation, location);
         }
-        
+
         setMemoText(inputMemo);
 
         JPanel timePanel = createTimePanel();
@@ -467,9 +471,15 @@ public class InputMaplistGUI extends javax.swing.JFrame {
         returnArraylist.add(returnEndTime);
         if (!inputTitle.getText().equals("Title") && !inputTitle.getText().equals("")) {
             UserDataController userdata = new UserDataController(idInput, inputTitle.getText(), returnArraylist);
-            MaplistGUI maplist = new MaplistGUI(idInput);
-            maplist.setVisible(true);
-            dispose();
+            
+            if (!userdata.toMessage()) {
+                MaplistGUI maplist = new MaplistGUI(idInput);
+                maplist.setVisible(true);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "중복된 타이틀이 존재합니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
         } else {
             JOptionPane.showMessageDialog(null, "타이틀을 입력해주세요.", "알림", JOptionPane.INFORMATION_MESSAGE);
         }

@@ -42,18 +42,11 @@ public class UserRespository { //데이터 액세스 로직을 캡슐화, 직접
         String checkOverlapId = "SELECT id FROM user WHERE id = '" + id + "'";
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(checkOverlapId);
-            //Statement 객체의 executeQuery 메서드를 사용하여 SQL 쿼리(checkOverlapId)를 실행하고, 그 결과를 ResultSet으로 반환
-            if (resultSet.next()) {
-                // If there is a result in the ResultSet, it means the ID already exists
-                return true;
-            } else {
-                // If no result, the ID doesn't exist
-                return false;
-            }
+            return resultSet.next();
         } catch (SQLException e) {
             System.out.println("checkOverlapId error");
+            return false;
         }
-        return true;
     }
 
     public String inputRegisterData() {//회원가입 정보 DB에 입력
