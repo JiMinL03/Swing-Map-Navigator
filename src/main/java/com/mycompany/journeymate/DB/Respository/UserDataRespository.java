@@ -31,38 +31,46 @@ public class UserDataRespository {//데이터 액세스 로직을 캡슐화, 직
         connect = Connect.getInstance();
         connection = connect.getConnection();
     }
-    public void UserDataRespository() {
-        createUserTable();
-        inputUserData();
-    }
 
-    private void createUserTable() {//로그인 id를 키값으로 연장선 테이블 생성
+    public void createUserTable() {//로그인 id를 키값으로 연장선 테이블 생성
+        System.out.println(userDataDTO.getTitle());
         String createTableQuery = "CREATE TABLE IF NOT EXISTS " + userDataDTO.getId() + " (user_id VARCHAR(255), FOREIGN KEY (user_id) REFERENCES user(id), title TEXT, location TEXT, memo TEXT, start_time TEXT, end_time TEXT)";
         try (Statement statement = connection.createStatement()) {
             statement.execute(createTableQuery);
-            System.out.println("Table created successfully.");
         } catch (SQLException e) {
             System.out.println("createUserTable error" + e);
-            e.printStackTrace();
         }
     }
 
-    private void inputUserData() {//회원가입 정보 DB에 입력
-        String inputUserData = "INSERT INTO " + userDataDTO.getId() + " (title, location, memo, start_time, end_time, user_id) VALUES (?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(inputUserData)) {
-            for (int i = 0; i < location.size(); i++) {
-                preparedStatement.setString(1, title);
-                preparedStatement.setString(2, location.get(i));
-                preparedStatement.setString(3, memo.get(i));
-                preparedStatement.setString(4, startTime.get(i));
-                preparedStatement.setString(5, endTime.get(i));
-                preparedStatement.setString(6, userDataDTO.getId());
-                preparedStatement.executeUpdate();
-            }
-            System.out.println("inputUseData success");
+    public boolean checkOverlapTitle() {
+        String checkOverlapTitle = "SELECT title FROM " + userDataDTO.getId() + " WHERE title = '" + userDataDTO.getTitle() + "'";
+        try (Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery(checkOverlapTitle);
+            return resultSet.next();
         } catch (SQLException e) {
-            System.out.println("inputRegisterData error");
+            System.out.println("checkOverlapTitle error: " + e.getMessage());
             e.printStackTrace();
+            return false; // 예외 발생 시 false를 반환하도록 처리
+        }
+    }
+
+    public void inputUserData() {
+        System.out.println(checkOverlapTitle());
+        if (!checkOverlapTitle()) {
+            String inputUserData = "INSERT INTO " + userDataDTO.getId() + " (title, location, memo, start_time, end_time, user_id) VALUES (?, ?, ?, ?, ?, ?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(inputUserData)) {
+                for (int i = 0; i < location.size(); i++) {
+                    preparedStatement.setString(1, title);
+                    preparedStatement.setString(2, location.get(i));
+                    preparedStatement.setString(3, memo.get(i));
+                    preparedStatement.setString(4, startTime.get(i));
+                    preparedStatement.setString(5, endTime.get(i));
+                    preparedStatement.setString(6, userDataDTO.getId());
+                    preparedStatement.executeUpdate();
+                }
+            } catch (SQLException e) {
+                System.out.println("inputRegisterData error");
+            }
         }
     }
 
@@ -76,7 +84,7 @@ public class UserDataRespository {//데이터 액세스 로직을 캡슐화, 직
                 titleList.add(title);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("아이디 관련 데이터가 없습니다.");
         }
         return titleList;
     }

@@ -1,5 +1,6 @@
 com\mycompany\journeymate\GUI\InputMaplistGUI$6.class
 com\mycompany\journeymate\GUI\MaplistGUI$3.class
+com\mycompany\journeymate\GUI\DesignPanel.class
 com\mycompany\journeymate\GUI\InputMaplistGUI.class
 com\mycompany\journeymate\DB\Respository\Connect.class
 com\mycompany\journeymate\DB\Respository\UserDataRespository.class
