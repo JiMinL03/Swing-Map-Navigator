@@ -471,7 +471,6 @@ public class InputMaplistGUI extends javax.swing.JFrame {
         returnArraylist.add(returnEndTime);
         if (!inputTitle.getText().equals("Title") && !inputTitle.getText().equals("")) {
             UserDataController userdata = new UserDataController(idInput, inputTitle.getText(), returnArraylist);
-            
             if (!userdata.toMessage()) {
                 MaplistGUI maplist = new MaplistGUI(idInput);
                 maplist.setVisible(true);
@@ -479,7 +478,6 @@ public class InputMaplistGUI extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "중복된 타이틀이 존재합니다.", "알림", JOptionPane.INFORMATION_MESSAGE);
             }
-            
         } else {
             JOptionPane.showMessageDialog(null, "타이틀을 입력해주세요.", "알림", JOptionPane.INFORMATION_MESSAGE);
         }
