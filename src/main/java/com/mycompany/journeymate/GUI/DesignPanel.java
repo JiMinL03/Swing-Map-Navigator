@@ -4,7 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import javax.swing.Box;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -22,18 +23,53 @@ public class DesignPanel {
         return textField;
     }
 
-    public JPanel createPanel() {
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        panel.setPreferredSize(new Dimension(600, 100));
+    public JPanel createPanel(String fromTitle, String fromLocation, String fromMemo, String fromStartTime, String fromEndTime) {
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panel.setPreferredSize(new Dimension(500, 300));
         panel.setOpaque(false);
 
+        JPanel titlePanel = new JPanel();
+        JLabel titleLabel = new JLabel("Title: ");
         JTextField title = createTextField(25, 600, 50, 18);
         title.setText("test");
-        JTextField location = createTextField(20, 600, 50, 18);
+        titlePanel.add(titleLabel);
+        titlePanel.add(title);
+
+        JPanel locationPanel = new JPanel();
+        JLabel locationLabel = new JLabel("Location: ");
+        JTextField location = createTextField(25, 600, 50, 18);
         location.setText("location");
-        panel.add(title);
-        panel.add(Box.createRigidArea(new Dimension(15, 0)));
-        panel.add(location);
+        locationPanel.add(locationLabel);
+        locationPanel.add(location);
+
+        JPanel memoPanel = new JPanel();
+        JLabel memoLabel = new JLabel("Memo: ");
+        JTextField memo = createTextField(25, 600, 50, 18);
+        memo.setText("memo");
+        memoPanel.add(memoLabel);
+        memoPanel.add(memo);
+
+        JPanel startTimePanel = new JPanel();
+        JLabel startTimeLabel = new JLabel("ETD: ");
+        JTextField startTime = createTextField(10, 600, 50, 18);
+        startTime.setText("startTime");
+        startTimePanel.add(startTimeLabel);
+        startTimePanel.add(startTime);
+
+        JPanel endTimePanel = new JPanel();
+        JLabel endTimeLabel = new JLabel("ETA: ");
+        JTextField endTime = createTextField(10, 600, 50, 18);
+        endTime.setText("endTime");
+        endTimePanel.add(endTimeLabel);
+        endTimePanel.add(endTime);
+
+        JButton goMap = new JButton("길찾기");
+        panel.add(titlePanel);
+        panel.add(locationPanel);
+        panel.add(memoPanel);
+        panel.add(startTimePanel);
+        panel.add(endTimePanel);
+        panel.add(goMap);
         return panel;
     }
 
